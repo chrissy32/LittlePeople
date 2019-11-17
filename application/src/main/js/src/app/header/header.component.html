@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top site-header">
+  <a class="navbar-brand" routerLink="/home" routerLinkActive="active">Little People</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item" *ngIf="isUserLogged == false">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="isUserLogged == true">
+        <a class="nav-link" routerLink="/news" routerLinkActive="active">News</a>
+      </li>
+      <li class="nav-item" *ngIf="isUserLogged == true">
+        <a class="nav-link" routerLink="/calendar" routerLinkActive="active">Calendar</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown" *ngIf="isUserLogged == true">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          User Actions
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  routerLink="/user_profile" routerLinkActive="active">User Profile</a>
+          <a class="dropdown-item"  routerLink="/logout" routerLinkActive="active">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
