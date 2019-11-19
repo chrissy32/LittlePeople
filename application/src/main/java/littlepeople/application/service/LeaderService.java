@@ -2,6 +2,7 @@ package littlepeople.application.service;
 
 import littlepeople.application.model.User;
 import littlepeople.application.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -14,6 +15,7 @@ public class LeaderService {
     private static final String MAIL_MESSAGE = "Hello, \n in this email you will find attached a password and a link.\n"
             + "Link: littlepeople.com/login \n Password:";
 
+    @Autowired
     public LeaderService(UserRepository userRepository, MailService mailService) {
         this.userRepository = userRepository;
         this.mailService = mailService;
