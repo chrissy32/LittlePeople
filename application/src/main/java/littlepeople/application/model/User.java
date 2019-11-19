@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Table(name = "Users")
+@Table(name = "users")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +26,7 @@ public class User extends BaseEntity {
     public Boolean isAdmin;
 
     @ManyToOne
+    @JoinColumn(name="hospital")
     private Hospital hospital;
 
 }

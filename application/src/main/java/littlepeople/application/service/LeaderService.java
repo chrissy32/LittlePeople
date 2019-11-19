@@ -2,7 +2,6 @@ package littlepeople.application.service;
 
 import littlepeople.application.model.User;
 import littlepeople.application.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -25,6 +24,6 @@ public class LeaderService {
         user.setPassword(password);
         System.out.println(user.toString());
         userRepository.save(user);
-        //mailService.sendEmail(user.getEmail(), MAIL_SUBJECT, MAIL_MESSAGE + password);
+        mailService.sendEmail(user.getEmail(), MAIL_SUBJECT, MAIL_MESSAGE + password);
     }
 }

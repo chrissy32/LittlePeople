@@ -4,5 +4,5 @@ CREATE TABLE Hospitals(
   city VARCHAR(255)
 );
 
-ALTER TABLE Users ADD hospitalId SERIAL;
-ALTER TABLE Users ADD FOREIGN KEY (hospitalId) REFERENCES Hospitals(id);
+ALTER TABLE Users ADD hospital INT;
+ALTER TABLE Users ADD FOREIGN KEY (hospital) REFERENCES Hospitals(id);
