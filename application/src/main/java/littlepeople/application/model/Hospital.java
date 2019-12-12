@@ -5,26 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
-@Table(name = "Users")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class User extends BaseEntity {
+public class Hospital extends BaseEntity {
+    @Column
+    private String name;
 
     @Column
-    public String username;
+    private String city;
 
     @Column
-    public String email;
-
-    @Column
-    public String password;
-
-    @Column
-    public Boolean isAdmin;
-
+    private String address;
 }
