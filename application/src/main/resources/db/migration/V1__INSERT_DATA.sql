@@ -15,8 +15,8 @@ INSERT INTO Activity(description, category, title, status, dateAndTime, hospital
           ('description1', 'games', 'title1', 'IN_PROGRESS', '2019-12-12 12:17:55', 1);
 
 
-INSERT INTO Report(description, category, title, text, hospital, activity) VALUES
-          ('description1', 'games', 'title1', 'text1', 1, 1);
+INSERT INTO Report(description, category, title, text,  activity) VALUES
+          ('description1', 'games', 'title1', 'text1', 1);
 
 
 INSERT INTO Activity_User(activity, user) VALUES

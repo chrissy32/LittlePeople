@@ -38,9 +38,7 @@ CREATE TABLE IF NOT EXISTS Report(id serial PRIMARY KEY,
       category VARCHAR(50) NOT NULL,
       title VARCHAR(100) NOT NULL,
       text VARCHAR(255) NOT NULL,
-      hospital BIGINT UNSIGNED,
       activity BIGINT UNSIGNED,
-      FOREIGN KEY(hospital) REFERENCES Hospital(id),
       FOREIGN KEY(activity) REFERENCES Activity(id));
 
 

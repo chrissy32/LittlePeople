@@ -70,12 +70,12 @@ public class UserController {
             message = "Bad Request | Signal received but could not be processed correctly."
     )})
     @RequestMapping(
-            name = "Edit User api",
+            name = "Update User api",
             value = {"/edit"},
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-    public void editUser(@RequestBody UserDto userDto){
+    public void updateUser(@RequestBody UserDto userDto){
         userService.updateUser(userDtoMapper.convertDtoToModel(userDto));
     }
 }

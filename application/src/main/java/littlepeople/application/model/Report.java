@@ -24,10 +24,6 @@ public class Report extends BaseEntity {
     private String text;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Hospital.class)
-    @JoinColumn(name = "hospital", referencedColumnName = "id")
-    private Hospital hospital;
-
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Activity.class)
     @JoinColumn(name = "activity", referencedColumnName = "id")
     private Activity activity;
@@ -37,7 +33,6 @@ public class Report extends BaseEntity {
         this.description = this.activity.getDescription();
         this.category = this.activity.getCategory();
         this.title = this.activity.getTitle();
-        this.hospital = this.activity.getHospital();
         this.text = text;
     }
 }
