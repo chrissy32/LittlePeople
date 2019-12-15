@@ -5,9 +5,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import littlepeople.application.dto.AddUserDto;
-import littlepeople.application.dto.UserDto;
+import littlepeople.application.dto.UserUpdateRequestDto;
 import littlepeople.application.mapper.AddUserDtoMapper;
-import littlepeople.application.mapper.UserDtoMapper;
+import littlepeople.application.service.LoginService;
 import littlepeople.application.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,11 @@ public class UserController {
     @Autowired
     UserService userService;
     @Autowired
-    UserDtoMapper userDtoMapper;
-    @Autowired
     AddUserDtoMapper addUserDtoMapper;
+    @Autowired
+    LoginService loginService;
+
+    private static final String LEADER_ENDPOINT = "/leader";
 
     @ApiOperation("Receive Add User signal.")
     @ApiResponses({@ApiResponse(
@@ -53,11 +55,11 @@ public class UserController {
     )})
     @RequestMapping(
             name = "Delete User api",
-            value = {"/delete"},
+            value = {LEADER_ENDPOINT + "/delete"},
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-    public void deleteUser(@RequestParam(value = "userId",required = true) long userId) {
+    public void deleteUser(@RequestParam(value = "userId") long userId) {
         userService.deleteUser(userId);
     }
 
@@ -75,7 +77,9 @@ public class UserController {
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-    public void updateUser(@RequestBody UserDto userDto){
-        userService.updateUser(userDtoMapper.convertDtoToModel(userDto));
+
+    public void updateUser(@RequestHeader("AUTHORIZATION") String userToken, @RequestBody UserUpdateRequestDto userDto) throws Exception {
+        Long userId = loginService.getUserSession(userToken).getUserId();
+        userService.updateUser(userId, userDto);
     }
 }
