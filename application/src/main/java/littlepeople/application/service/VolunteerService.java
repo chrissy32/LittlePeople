@@ -12,15 +12,15 @@ public class VolunteerService {
     @Autowired
     VolunteerRepository volunteerRepository;
 
-    void addVolunteer() {
+    public void addVolunteer() {
 
     }
 
-    void deleteVolunteer() {
-
+    public void deleteVolunteer(long volunteerId) {
+        this.volunteerRepository.deleteById(volunteerId);
     }
 
-    void updateVolunteer(){
+    public void updateVolunteer(){
 
     }
 }
