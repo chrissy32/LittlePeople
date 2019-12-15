@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +35,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User getUserById(Long id) {
-        return userRepository.getOne(id);
+    public User getUserById(long userId) throws Exception {
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if (!optionalUser.isPresent()) {
+            throw new Exception("Invalid user id!");
+        }
+
+        return optionalUser.get();
     }
 }
