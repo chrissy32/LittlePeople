@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Volunteer(id serial PRIMARY KEY,
       phone VARCHAR(15) UNIQUE,
       firstName VARCHAR(100),
       surname VARCHAR(100),
-      hospital INT,
+      hospital BIGINT UNSIGNED,
       FOREIGN KEY(hospital) REFERENCES Hospital(id));
 
 CREATE TABLE IF NOT EXISTS Proposal(id serial PRIMARY KEY,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS Proposal(id serial PRIMARY KEY,
       category VARCHAR(50),
       title VARCHAR(100),
       status VARCHAR(10) NOT NULL,
-      hospital INT,
+      hospital BIGINT UNSIGNED,
       FOREIGN KEY(hospital) REFERENCES Hospital(id));
 
 CREATE TABLE IF NOT EXISTS Activity(id serial PRIMARY KEY,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Activity(id serial PRIMARY KEY,
       title VARCHAR(100) NOT NULL,
       status VARCHAR(12) NOT NULL,
       dateAndTime TIMESTAMP NOT NULL,
-      hospital INT,
+      hospital BIGINT UNSIGNED,
       FOREIGN KEY(hospital) REFERENCES Hospital(id));
 
 CREATE TABLE IF NOT EXISTS Report(id serial PRIMARY KEY,
@@ -44,21 +44,21 @@ CREATE TABLE IF NOT EXISTS Report(id serial PRIMARY KEY,
       category VARCHAR(50) NOT NULL,
       title VARCHAR(100) NOT NULL,
       text VARCHAR(255) NOT NULL,
-      hospital INT,
-      activity INT,
+      hospital BIGINT UNSIGNED,
+      activity BIGINT UNSIGNED,
       FOREIGN KEY(hospital) REFERENCES Hospital(id),
       FOREIGN KEY(activity) REFERENCES Activity(id));
 
 CREATE TABLE IF NOT EXISTS Hospital_Leader(id serial PRIMARY KEY,
-      hospital int NOT NULL,
-      leader int NOT NULL,
+      hospital BIGINT UNSIGNED NOT NULL,
+      leader BIGINT UNSIGNED NOT NULL,
       UNIQUE(hospital, leader),
       FOREIGN KEY(hospital) REFERENCES Hospital(id),
       FOREIGN KEY(leader) REFERENCES Leader(id));
 
 CREATE TABLE IF NOT EXISTS Activity_Volunteer(id serial PRIMARY KEY,
-      activity int NOT NULL,
-      volunteer int NOT NULL,
+      activity BIGINT UNSIGNED NOT NULL,
+      volunteer BIGINT UNSIGNED NOT NULL,
       UNIQUE(activity, volunteer),
       FOREIGN KEY(activity) REFERENCES Activity(id),
       FOREIGN KEY(volunteer) REFERENCES Volunteer(id));
