@@ -1,6 +1,7 @@
 package littlepeople.application.service;
 
 import littlepeople.application.model.Activity;
+import littlepeople.application.model.Hospital;
 import littlepeople.application.repository.ActivityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class ActivityService {
     ActivityRepository activityRepository;
 
     public List<Activity> getAllActivitiesFromCity(String city){
-        return activityRepository.getAllActivitesFromCity(city);
+        return activityRepository.getAllActivitiesFromCity(city);
+    }
+
+    public List<Activity> getAllActivitiesFromHospital(Hospital hospital){
+        return activityRepository.getAllActivitesFromHospital(hospital.id);
     }
 }
