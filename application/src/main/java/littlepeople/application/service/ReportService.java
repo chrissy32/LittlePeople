@@ -19,4 +19,8 @@ public class ReportService {
     public void addReport(Report report) {
         reportRepository.save(report);
     }
+
+    public Report getReportByActivityId(Long activityId) {
+        return reportRepository.getByActivity_Id(activityId);
+    }
 }

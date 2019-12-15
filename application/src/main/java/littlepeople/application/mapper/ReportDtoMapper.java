@@ -13,6 +13,9 @@ public class ReportDtoMapper extends  AbstractMapper<Report, ReportDto> {
 
     @Override
     public ReportDto convertModelToDto(Report report) {
-        return null;
+        ReportDto reportDto = new ReportDto();
+        reportDto.setActivity(report.getActivity());
+        reportDto.setText(report.getText());
+        return reportDto;
     }
 }

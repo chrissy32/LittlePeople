@@ -10,10 +10,7 @@ import littlepeople.application.mapper.ReportDtoMapper;
 import littlepeople.application.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,6 +42,24 @@ public class ReportController {
 
     public void updateReport(){}
     public void deleteReport(){}
-    public ReportDto getReportByActivityId(Long activityId){}
+
+
+    @ApiOperation("Receive Add User signal.")
+    @ApiResponses({@ApiResponse(
+            code = 200,
+            message = "Signal received and processed successfully."
+    ), @ApiResponse(
+            code = 400,
+            message = "Bad Request | Signal received but could not be processed correctly."
+    )})
+    @RequestMapping(
+            name = "Add User api",
+            value = {""},
+            produces = {"application/json"},
+            method = {RequestMethod.POST}
+    )
+    public ReportDto getReportByActivityId(@RequestParam(value = "activityId",required = true) Long activityId){
+        return reportDtoMapper.convertModelToDto(reportService.getReportByActivityId(activityId));
+    }
 
 }
