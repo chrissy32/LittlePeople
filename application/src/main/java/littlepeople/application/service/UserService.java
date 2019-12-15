@@ -1,26 +1,26 @@
 package littlepeople.application.service;
 
-import littlepeople.application.repository.VolunteerRepository;
+import littlepeople.application.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class VolunteerService {
+public class UserService {
 
     @Autowired
-    VolunteerRepository volunteerRepository;
+    UserRepository userRepository;
 
-    void addVolunteer() {
-
-    }
-
-    void deleteVolunteer() {
+    void addUser() {
 
     }
 
-    void updateVolunteer(){
+    void deleteUser() {
+
+    }
+
+    void updateUser(){
 
     }
 }

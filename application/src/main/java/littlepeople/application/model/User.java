@@ -1,5 +1,6 @@
 package littlepeople.application.model;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Volunteer extends BaseEntity {
+public class User extends BaseEntity {
+
     @Column
     private String username;
 
@@ -30,6 +32,12 @@ public class Volunteer extends BaseEntity {
 
     @Column
     private String surname;
+
+    @Column
+    private Boolean isAdmin;
+
+    @Column
+    private String city;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Hospital.class)
     @JoinColumn(name = "hospital", referencedColumnName = "id")

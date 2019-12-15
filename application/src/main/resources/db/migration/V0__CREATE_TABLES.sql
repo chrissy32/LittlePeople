@@ -3,21 +3,15 @@ CREATE TABLE IF NOT EXISTS Hospital(id SERIAL PRIMARY KEY,
       city VARCHAR(50) NOT NULL,
       address VARCHAR(255) NOT NULL);
 
-CREATE TABLE IF NOT EXISTS Leader(id serial PRIMARY KEY,
-      username VARCHAR(50) UNIQUE NOT NULL,
-      password VARCHAR(100) NOT NULL,
-      email VARCHAR(100) UNIQUE NOT NULL,
-      phone VARCHAR(15) UNIQUE,
-      firstName VARCHAR(100),
-      surname VARCHAR(100));
-
-CREATE TABLE IF NOT EXISTS Volunteer(id serial PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS User(id serial PRIMARY KEY,
       username VARCHAR(50) UNIQUE NOT NULL,
       password VARCHAR(100) NOT NULL,
       email VARCHAR(100) UNIQUE NOT NULL,
       phone VARCHAR(15) UNIQUE,
       firstName VARCHAR(100),
       surname VARCHAR(100),
+      city VARCHAR(100),
+      isAdmin BOOLEAN,
       hospital BIGINT UNSIGNED,
       FOREIGN KEY(hospital) REFERENCES Hospital(id));
 
@@ -49,16 +43,10 @@ CREATE TABLE IF NOT EXISTS Report(id serial PRIMARY KEY,
       FOREIGN KEY(hospital) REFERENCES Hospital(id),
       FOREIGN KEY(activity) REFERENCES Activity(id));
 
-CREATE TABLE IF NOT EXISTS Hospital_Leader(id serial PRIMARY KEY,
-      hospital BIGINT UNSIGNED NOT NULL,
-      leader BIGINT UNSIGNED NOT NULL,
-      UNIQUE(hospital, leader),
-      FOREIGN KEY(hospital) REFERENCES Hospital(id),
-      FOREIGN KEY(leader) REFERENCES Leader(id));
 
-CREATE TABLE IF NOT EXISTS Activity_Volunteer(id serial PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Activity_User(id serial PRIMARY KEY,
       activity BIGINT UNSIGNED NOT NULL,
-      volunteer BIGINT UNSIGNED NOT NULL,
-      UNIQUE(activity, volunteer),
+      user BIGINT UNSIGNED NOT NULL,
+      UNIQUE(activity, user),
       FOREIGN KEY(activity) REFERENCES Activity(id),
-      FOREIGN KEY(volunteer) REFERENCES Volunteer(id));
+      FOREIGN KEY(user) REFERENCES User(id));

@@ -37,10 +37,4 @@ public class Activity extends BaseEntity {
     @JoinColumn(name = "report", referencedColumnName = "id")
     private Report report;
 
-    public Activity(String description, String category, String title, LocalDateTime dateAndTime) {
-        this.description = description;
-        this.category = category;
-        this.title = title;
-        this.dateAndTime = dateAndTime;
-    }
 }

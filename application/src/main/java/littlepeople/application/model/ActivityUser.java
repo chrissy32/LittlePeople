@@ -13,12 +13,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ActivityVolunteer extends BaseEntity {
+public class ActivityUser extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity", referencedColumnName = "id")
     private Activity activity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "volunteer", referencedColumnName = "id")
-    private Volunteer volunteer;
+    @JoinColumn(name = "user", referencedColumnName = "id")
+    private User user;
 }
