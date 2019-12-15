@@ -37,7 +37,7 @@ public class UserController {
     )})
     @RequestMapping(
             name = "Add User api",
-            value = {"/add"},
+            value = {LEADER_ENDPOINT + "/add"},
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )

@@ -11,10 +11,12 @@ public class AddUserDtoMapper extends  AbstractMapper<User, AddUserDto> {
 
     @Autowired
     HospitalService hospitalService;
+
     @Override
     public User convertDtoToModel(AddUserDto addUserDto) {
         User user = new User();
         user.setEmail(addUserDto.getEmail());
+        user.setUsername(addUserDto.getEmail().substring(0, addUserDto.getEmail().indexOf("@")));
         user.setHospital(hospitalService.getById(addUserDto.getHospitalId()));
         return user;
     }
