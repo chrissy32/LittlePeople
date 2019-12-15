@@ -1,10 +1,12 @@
 package littlepeople.application.service;
 
+import littlepeople.application.dto.UserUpdateRequestDto;
 import littlepeople.application.model.User;
 import littlepeople.application.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 import java.util.Optional;
@@ -19,6 +21,7 @@ public class UserService {
     @Autowired
     MailService mailService;
 
+
     public void addUser(User user) {
         final String password = UUID.randomUUID().toString().replace("-","");
         user.setPassword(password);
@@ -26,15 +29,21 @@ public class UserService {
         mailService.sendEmail(user.getEmail(), MailService.MAIL_SUBJECT, MailService.MAIL_MESSAGE + password);
     }
 
+    @Transactional
     public void deleteUser(long userId) {
-
         userRepository.deleteById(userId);
     }
 
-    public void updateUser(User user){
-        userRepository.save(user);
+    @Transactional
+    public void updateUser(Long id, UserUpdateRequestDto userUpdateRequestDto) {
+        User user = this.userRepository.findById(id).get();
+        user.setUsername(userUpdateRequestDto.getUsername());
+        user.setPassword(userUpdateRequestDto.getPassword());
+        user.setPhone(userUpdateRequestDto.getPhone());
+        user.setFirstName(userUpdateRequestDto.getFirstName());
+        user.setSurname(userUpdateRequestDto.getSurname());
+        user.setCity(userUpdateRequestDto.getCity());
     }
-
     public User getUserById(long userId) throws Exception {
         Optional<User> optionalUser = userRepository.findById(userId);
 

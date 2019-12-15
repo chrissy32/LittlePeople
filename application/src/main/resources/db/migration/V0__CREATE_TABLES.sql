@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Activity(id serial PRIMARY KEY,
       status VARCHAR(12) NOT NULL,
       dateAndTime TIMESTAMP NOT NULL,
       hospital BIGINT UNSIGNED,
-      FOREIGN KEY(hospital) REFERENCES Hospital(id));
+      FOREIGN KEY(hospital) REFERENCES Hospital(id) ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS Report(id serial PRIMARY KEY,
       description VARCHAR(255) NOT NULL,
@@ -41,12 +41,12 @@ CREATE TABLE IF NOT EXISTS Report(id serial PRIMARY KEY,
       hospital BIGINT UNSIGNED,
       activity BIGINT UNSIGNED,
       FOREIGN KEY(hospital) REFERENCES Hospital(id),
-      FOREIGN KEY(activity) REFERENCES Activity(id));
+      FOREIGN KEY(activity) REFERENCES Activity(id) ON DELETE CASCADE);
 
 
 CREATE TABLE IF NOT EXISTS Activity_User(id serial PRIMARY KEY,
       activity BIGINT UNSIGNED NOT NULL,
       user BIGINT UNSIGNED NOT NULL,
       UNIQUE(activity, user),
-      FOREIGN KEY(activity) REFERENCES Activity(id),
-      FOREIGN KEY(user) REFERENCES User(id));
+      FOREIGN KEY(activity) REFERENCES Activity(id) ON DELETE CASCADE,
+      FOREIGN KEY(user) REFERENCES User(id) ON DELETE CASCADE);
