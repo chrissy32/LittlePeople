@@ -1,5 +1,6 @@
 package littlepeople.application.service;
 
+import littlepeople.application.model.User;
 import littlepeople.application.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,15 @@ public class UserService {
     }
 
     public void deleteUser(long userId) {
+
         userRepository.deleteById(userId);
     }
 
-    void updateUser(){
+    public void updateUser(User user){
+        userRepository.save(user);
+    }
 
+    public User getUserById(Long id) {
+        return userRepository.getOne(id);
     }
 }

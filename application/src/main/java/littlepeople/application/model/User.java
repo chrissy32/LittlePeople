@@ -1,10 +1,7 @@
 package littlepeople.application.model;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class User extends BaseEntity {
 
     @Column

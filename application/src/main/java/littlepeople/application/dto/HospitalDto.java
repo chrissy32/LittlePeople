@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class HospitalDto {
+public class HospitalDto extends BaseDto{
     private String name;
     private String city;
     private String address;
