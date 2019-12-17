@@ -1,30 +1,43 @@
 package littlepeople.application.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.ser.Serializers;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Table(name = "Users")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class User extends BaseEntity {
 
     @Column
-    public String username;
+    private String username;
 
     @Column
-    public String email;
+    private String password;
 
     @Column
-    public String password;
+    private String email;
 
     @Column
-    public Boolean isAdmin;
+    private String phone;
 
+    @Column
+    private String firstName;
+
+    @Column
+    private String surname;
+
+    @Column
+    private Boolean isAdmin;
+
+    @Column
+    private String city;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Hospital.class)
+    @JoinColumn(name = "hospital", referencedColumnName = "id")
+    private Hospital hospital;
 }
