@@ -24,7 +24,7 @@ public class LoginService {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-    boolean isUserLoggedIn(String userToken) {
+    public boolean isUserLoggedIn(String userToken) {
         if (connectedUsers.containsKey(userToken)) {
             return true;
         }
@@ -66,5 +66,12 @@ public class LoginService {
         return newSession;
     }
 
+    public void logoutUser(String userToken) throws Exception {
+        if (!this.isUserLoggedIn(userToken)) {
+            throw new Exception("User was not logged in previously");
+        }
+
+        connectedUsers.remove(userToken);
+    }
 
 }

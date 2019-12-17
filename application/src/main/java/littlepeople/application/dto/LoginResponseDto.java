@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
+@ToString
 public class LoginResponseDto {
     private String userToken;
     private String username;
