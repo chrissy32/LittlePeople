@@ -1,4 +1,4 @@
-package littlepeople.application.configuration.filters;
+package littlepeople.application.filters;
 
 import littlepeople.application.service.LoginService;
 import lombok.extern.log4j.Log4j2;
