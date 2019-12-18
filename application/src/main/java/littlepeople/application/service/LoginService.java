@@ -7,6 +7,7 @@ import littlepeople.application.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -59,6 +60,7 @@ public class LoginService {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .isAdmin(user.getIsAdmin())
+                .sessionCreationTime(Instant.now())
                 .build();
 
         //add user to connected

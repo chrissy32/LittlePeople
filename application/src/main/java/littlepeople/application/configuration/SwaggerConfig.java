@@ -19,7 +19,6 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return (new Docket(DocumentationType.SWAGGER_2)).apiInfo(this.apiInfo()).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
-
     }
 
     private ApiInfo apiInfo() {
