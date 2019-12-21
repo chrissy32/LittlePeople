@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 public class LoginResponseDto {
     private String userToken;
+    private String email;
     private String username;
     private String phone;
     private String firstName;
@@ -17,5 +18,4 @@ public class LoginResponseDto {
     private Boolean isAdmin;
     private String city;
     private long hospitalId;
-
 }
