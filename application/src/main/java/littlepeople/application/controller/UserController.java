@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import littlepeople.application.dto.AddUserDto;
+import littlepeople.application.dto.UserUpdatePasswordRequestDto;
 import littlepeople.application.dto.UserUpdateRequestDto;
 import littlepeople.application.mapper.AddUserDtoMapper;
 import littlepeople.application.service.LoginService;
@@ -77,9 +78,30 @@ public class UserController {
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-
     public void updateUser(@RequestHeader("AUTHORIZATION") String userToken, @RequestBody UserUpdateRequestDto userDto) throws Exception {
         Long userId = loginService.getUserSession(userToken).getUserId();
         userService.updateUser(userId, userDto);
     }
+
+
+    @ApiOperation("Receive Update User Password signal.")
+    @ApiResponses({@ApiResponse(
+            code = 200,
+            message = "Signal received and processed successfully."
+    ), @ApiResponse(
+            code = 400,
+            message = "Bad Request | Signal received but could not be processed correctly."
+    )})
+    @RequestMapping(
+            name = "Update User Password api",
+            value = {"/update_password"},
+            produces = {"application/json"},
+            method = {RequestMethod.POST}
+    )
+    public void updateUserPassword(@RequestHeader("AUTHORIZATION") String userToken,
+                                   @RequestBody UserUpdatePasswordRequestDto userUpdatePasswordRequestDto) throws Exception {
+        long userId = loginService.getUserSession(userToken).getUserId();
+        userService.updateUserPassword(userId, userUpdatePasswordRequestDto.getNewPassword());
+    }
 }
+
