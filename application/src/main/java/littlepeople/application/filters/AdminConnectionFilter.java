@@ -29,6 +29,11 @@ public class AdminConnectionFilter extends GenericFilterBean {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
+        if (httpRequest.getMethod().equals("OPTIONS")) {
+            filterChain.doFilter(httpRequest, httpResponse);
+            return;
+        }
+
         String userToken = httpRequest.getHeader("AUTHORIZATION");
         try {
             Session userSession = loginService.getUserSession(userToken);

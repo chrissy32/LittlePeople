@@ -32,6 +32,12 @@ public class UserConnectionFilter extends GenericFilterBean {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
+        if (httpRequest.getMethod().equals("OPTIONS")) {
+            filterChain.doFilter(httpRequest, httpResponse);
+            return;
+        }
+
+
         Optional<String> optionalUserToken = Optional.ofNullable(httpRequest.getHeader("AUTHORIZATION"));
         if (!optionalUserToken.isPresent()) {
             log.trace("UserConnectionFilter: doFilter() No AUTHORIZATION header!");
