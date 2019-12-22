@@ -62,6 +62,4 @@ public class ActivityController {
     public List<Activity> getAllActivitiesFromHospital(@RequestParam (value = "hospital",required = true) Hospital hospital) {
         return activityService.getAllActivitiesFromHospital(hospital);
     }
-
-
 }
