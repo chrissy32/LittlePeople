@@ -15,8 +15,8 @@ public class ReportService {
     @Autowired
     ReportRepository reportRepository;
 
-    public void addReport(Report report) {
-        reportRepository.save(report);
+    public Report addReport(Report report) {
+        return reportRepository.save(report);
     }
 
     public Report getReportByActivityId(Long activityId) {
@@ -27,7 +27,7 @@ public class ReportService {
         reportRepository.deleteById(reportId);
     }
 
-    public void updateReport(Report report) {
-        reportRepository.save(report);
+    public Report updateReport(Report report) {
+        return reportRepository.save(report);
     }
 }

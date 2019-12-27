@@ -1,10 +1,7 @@
 package littlepeople.application.dto;
 
 import littlepeople.application.model.Hospital;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor

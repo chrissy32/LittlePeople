@@ -2,14 +2,16 @@ package littlepeople.application.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class ReportDto extends BaseDto{
+public class ActivityDto extends BaseDto{
     private String description;
     private String category;
     private String title;
-    private String text;
-    private Long activityId;
+    private String status;
+    private LocalDateTime dateAndTime;
+    private Long hospitalId;
 }

@@ -24,7 +24,11 @@ public class ActivityService {
         return activityRepository.getAllActivitiesFromCity(city);
     }
 
-    public List<Activity> getAllActivitiesFromHospital(Hospital hospital){
-        return activityRepository.getAllActivitesFromHospital(hospital.id);
+    public List<Activity> getAllActivitiesFromHospital(Long hospitalId){
+        return activityRepository.getAllActivitesFromHospital(hospitalId);
+    }
+
+    public Activity getActivityById(Long id){
+        return activityRepository.findById(id).get();
     }
 }

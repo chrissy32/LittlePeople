@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     LoginService loginService;
 
-    private static final String LEADER_ENDPOINT = "/leader";
+    protected static final String LEADER_ENDPOINT = "/leader";
 
     @ApiOperation("Receive Add User signal.")
     @ApiResponses({@ApiResponse(
