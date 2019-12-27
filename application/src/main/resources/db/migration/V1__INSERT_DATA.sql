@@ -3,10 +3,10 @@ INSERT INTO Hospital(name, city, address) VALUES
           ('Regina Maria', 'Cluj-Napoca', 'Strada Louis Pasteur nr. 24/72');
 
 INSERT INTO User(username, password, email, phone, firstName, surname, city, isAdmin, hospital) VALUES
-          ('leader1', '$2y$10$lK90q8vjo.kvsgF2GcLf0O0ECs0bWOmr.4.GKKb3vBXfX0XL9kizG', 'leader1@gmail.com', '0720321456', 'firstName', 'surname', 'cluj',true,null);
+          ('leader1', '1234', 'leader1@gmail.com', '0720321456', 'firstName', 'surname', 'cluj',true,null);
 
 INSERT INTO User(username, password, email, phone, firstName, surname, city, isAdmin, hospital)  VALUES
-          ('moisit', '$2y$10$QbdSAzvUI/2MwE.kIyLdQOKDhSmgFmuSFL.nq8Eh.tXX2IjFNcJD.', 'moisit@gmail.com', '0720321458', 'Teofana', 'Moisi','cluj',false, 1);
+          ('moisit', '1234', 'moisit@gmail.com', '0720321458', 'Teofana', 'Moisi','cluj',false, 1);
 
 INSERT INTO Proposal(proposedBy, description, category, title, status, hospital) VALUES
           ('moisit', 'description1', 'games', 'title1', 'PENDING', 2);
