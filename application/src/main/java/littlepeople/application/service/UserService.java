@@ -45,6 +45,7 @@ public class UserService {
         user.setSurname(userUpdateRequestDto.getSurname());
         user.setCity(userUpdateRequestDto.getCity());
     }
+
     public User getUserById(long userId) throws Exception {
         Optional<User> optionalUser = userRepository.findById(userId);
 
@@ -53,5 +54,11 @@ public class UserService {
         }
 
         return optionalUser.get();
+    }
+
+    @Transactional
+    public void updateUserPassword(long userId, String newPassword) throws Exception {
+        User user = this.getUserById(userId);
+        user.setPassword(newPassword);
     }
 }
