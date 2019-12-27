@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Configuration
 public class FilterConfiguration {
 
@@ -20,6 +21,7 @@ public class FilterConfiguration {
 
     @Autowired
     private AdminConnectionFilter adminConnectionFilter;
+
 
     @Bean
     public FilterRegistrationBean<RequestResponseLoggingFilter> loggingFilterFilterRegistrationBean() {

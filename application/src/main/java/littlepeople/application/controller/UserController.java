@@ -7,7 +7,9 @@ import io.swagger.annotations.ApiResponses;
 import littlepeople.application.dto.AddUserDto;
 import littlepeople.application.dto.UserUpdatePasswordRequestDto;
 import littlepeople.application.dto.UserUpdateRequestDto;
+import littlepeople.application.dto.UserUpdateResponseDto;
 import littlepeople.application.mapper.AddUserDtoMapper;
+import littlepeople.application.model.User;
 import littlepeople.application.service.LoginService;
 import littlepeople.application.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -78,9 +80,28 @@ public class UserController {
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-    public void updateUser(@RequestHeader("AUTHORIZATION") String userToken, @RequestBody UserUpdateRequestDto userDto) throws Exception {
+
+    public UserUpdateResponseDto updateUser(@RequestHeader("AUTHORIZATION") String userToken, @RequestBody UserUpdateRequestDto userDto) throws Exception {
         Long userId = loginService.getUserSession(userToken).getUserId();
         userService.updateUser(userId, userDto);
+
+        User userInformation = userService.getUserById(userId);
+        long hospitalId = -1;
+        if (!userInformation.getIsAdmin()) {
+            hospitalId = userInformation.getHospital().getId();
+        }
+
+        return UserUpdateResponseDto.builder()
+                .userToken(userToken)
+                .email(userInformation.getEmail())
+                .username(userInformation.getUsername())
+                .phone(userInformation.getPhone())
+                .firstName(userInformation.getFirstName())
+                .surname(userInformation.getSurname())
+                .isAdmin(userInformation.getIsAdmin())
+                .city(userInformation.getCity())
+                .hospitalId(hospitalId)
+                .build();
     }
 
 
