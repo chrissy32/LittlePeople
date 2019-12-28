@@ -2,23 +2,33 @@ package littlepeople.application.mapper;
 
 import littlepeople.application.dto.ActivityDto;
 import littlepeople.application.model.Activity;
+import littlepeople.application.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class ActivityDtoMapper extends AbstractMapper<Activity, ActivityDto> {
     @Autowired
-    HospitalDtoMapper hospitalDtoMapper;
-
-    @Autowired
-    ReportDtoMapper reportDtoMapper;
+    HospitalService hospitalService;
 
     @Override
     public Activity convertDtoToModel(ActivityDto activityDto) {
-        return null;
+        Activity activity = new Activity();
+        activity.setId(activityDto.getId());
+        activity.setDescription(activityDto.getDescription());
+        activity.setCategory(activityDto.getCategory());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        activity.setDateAndTime(LocalDateTime.parse(activityDto.getDateAndTime(), formatter));
+        activity.setTitle(activityDto.getTitle());
+        activity.setStatus(activityDto.getStatus());
+        activity.setHospital(hospitalService.getById(activityDto.getHospitalId()));
+        return activity;
     }
 
     @Override
@@ -27,7 +37,7 @@ public class ActivityDtoMapper extends AbstractMapper<Activity, ActivityDto> {
         activityDto.setId(activity.getId());
         activityDto.setDescription(activity.getDescription());
         activityDto.setCategory(activity.getCategory());
-        activityDto.setDateAndTime(activity.getDateAndTime());
+        activityDto.setDateAndTime(activity.getDateAndTime().toString());
         activityDto.setHospitalId(activity.getHospital().getId());
         activityDto.setStatus(activity.getStatus());
         activityDto.setTitle(activity.getTitle());

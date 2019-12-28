@@ -1,9 +1,9 @@
 package littlepeople.application.model;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @NoArgsConstructor
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Serializable {
 
     @Column
     private String username;

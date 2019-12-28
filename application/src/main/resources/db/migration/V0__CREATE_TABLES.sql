@@ -16,13 +16,15 @@ CREATE TABLE IF NOT EXISTS User(id serial PRIMARY KEY,
       FOREIGN KEY(hospital) REFERENCES Hospital(id));
 
 CREATE TABLE IF NOT EXISTS Proposal(id serial PRIMARY KEY,
-      proposedBy VARCHAR(100) NOT NULL,
+      proposedBy VARCHAR(50) NOT NULL,
       description VARCHAR(255) NOT NULL,
       category VARCHAR(50),
       title VARCHAR(100),
       status VARCHAR(10) NOT NULL,
+      dateAndTime TIMESTAMP NOT NULL,
       hospital BIGINT UNSIGNED,
-      FOREIGN KEY(hospital) REFERENCES Hospital(id));
+      FOREIGN KEY(hospital) REFERENCES Hospital(id),
+      FOREIGN KEY(proposedBy) REFERENCES User(username));
 
 CREATE TABLE IF NOT EXISTS Activity(id serial PRIMARY KEY,
       description VARCHAR(255) NOT NULL,

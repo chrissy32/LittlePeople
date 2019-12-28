@@ -14,6 +14,6 @@ public class HospitalService{
     HospitalRepository hospitalRepository;
 
     public Hospital getById(Long hospitalId) {
-        return hospitalRepository.getOne(hospitalId);
+        return hospitalRepository.findById(hospitalId).get();
     }
 }

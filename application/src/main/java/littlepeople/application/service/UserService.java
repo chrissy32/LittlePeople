@@ -54,6 +54,10 @@ public class UserService {
         return optionalUser.get();
     }
 
+    public User getUserByUsername(String username) {
+        return this.userRepository.findByUsername(username).get();
+    }
+
     @Transactional
     public void updateUserPassword(long userId, String newPassword) {
         User user = this.userRepository.findById(userId).get();

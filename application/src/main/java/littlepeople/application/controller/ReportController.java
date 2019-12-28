@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import littlepeople.application.dto.ReportDto;
 import littlepeople.application.mapper.ReportDtoMapper;
-import littlepeople.application.model.Report;
 import littlepeople.application.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
