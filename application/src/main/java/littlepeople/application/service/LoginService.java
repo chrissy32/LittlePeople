@@ -7,6 +7,7 @@ import littlepeople.application.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class LoginService {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-    boolean isUserLoggedIn(String userToken) {
+    public boolean isUserLoggedIn(String userToken) {
         if (connectedUsers.containsKey(userToken)) {
             return true;
         }
@@ -59,6 +60,7 @@ public class LoginService {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .isAdmin(user.getIsAdmin())
+                .sessionCreationTime(Instant.now())
                 .build();
 
         //add user to connected
@@ -66,5 +68,12 @@ public class LoginService {
         return newSession;
     }
 
+    public void logoutUser(String userToken) throws Exception {
+        if (!this.isUserLoggedIn(userToken)) {
+            throw new Exception("User was not logged in previously");
+        }
+
+        connectedUsers.remove(userToken);
+    }
 
 }

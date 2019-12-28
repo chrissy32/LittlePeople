@@ -1,14 +1,11 @@
 package littlepeople.application.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
-public class LoginResponseDto {
+public class UserUpdateResponseDto {
     private String userToken;
     private String email;
     private String username;

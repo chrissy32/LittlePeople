@@ -4,13 +4,15 @@ package littlepeople.application.controller;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import littlepeople.application.dto.AddUserDto;
 import littlepeople.application.dto.ReportDto;
 import littlepeople.application.mapper.ReportDtoMapper;
+import littlepeople.application.model.Report;
 import littlepeople.application.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import static littlepeople.application.controller.UserController.LEADER_ENDPOINT;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,9 +38,10 @@ public class ReportController {
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-    public void addReport(@RequestBody ReportDto reportDto) {
-        reportService.addReport(reportDtoMapper.convertDtoToModel(reportDto));
+    public ReportDto addReport(@RequestBody ReportDto reportDto) {
+        return reportDtoMapper.convertModelToDto(reportService.addReport(reportDtoMapper.convertDtoToModel(reportDto)));
     }
+
     @ApiOperation("Receive Update Report signal.")
     @ApiResponses({@ApiResponse(
             code = 200,
@@ -53,8 +56,8 @@ public class ReportController {
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-    public void updateReport(@RequestBody ReportDto reportDto){
-        reportService.updateReport(reportDtoMapper.convertDtoToModel(reportDto));
+    public ReportDto updateReport(@RequestBody ReportDto reportDto) {
+        return reportDtoMapper.convertModelToDto(reportService.updateReport(reportDtoMapper.convertDtoToModel(reportDto)));
     }
 
     @ApiOperation("Receive Delete Report signal.")
@@ -67,11 +70,11 @@ public class ReportController {
     )})
     @RequestMapping(
             name = "Delete Report api",
-            value = {"/delete"},
+            value = {LEADER_ENDPOINT + "/delete"},
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-    public void deleteReport(@RequestParam(value = "reportId",required = true) Long reportId){
+    public void deleteReport(@RequestParam(value = "reportId") Long reportId) {
         reportService.deleteReport(reportId);
     }
 
@@ -86,11 +89,11 @@ public class ReportController {
     )})
     @RequestMapping(
             name = "Get Report api",
-            value = {""},
+            value = {"/getReportById"},
             produces = {"application/json"},
             method = {RequestMethod.GET}
     )
-    public ReportDto getReportByActivityId(@RequestParam(value = "activityId",required = true) Long activityId){
+    public ReportDto getReportByActivityId(@RequestParam(value = "activityId") Long activityId) {
         return reportDtoMapper.convertModelToDto(reportService.getReportByActivityId(activityId));
     }
 

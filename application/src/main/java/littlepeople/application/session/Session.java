@@ -3,6 +3,8 @@ package littlepeople.application.session;
 
 import lombok.*;
 
+import java.time.Instant;
+
 
 @Getter
 @Setter
@@ -15,4 +17,5 @@ public class Session {
     private String username;
     private String email;
     private boolean isAdmin;
+    private Instant sessionCreationTime;
 }

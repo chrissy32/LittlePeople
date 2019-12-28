@@ -39,12 +39,11 @@ public class UserService {
     public void updateUser(Long id, UserUpdateRequestDto userUpdateRequestDto) {
         User user = this.userRepository.findById(id).get();
         user.setUsername(userUpdateRequestDto.getUsername());
-        user.setPassword(userUpdateRequestDto.getPassword());
         user.setPhone(userUpdateRequestDto.getPhone());
         user.setFirstName(userUpdateRequestDto.getFirstName());
         user.setSurname(userUpdateRequestDto.getSurname());
-        user.setCity(userUpdateRequestDto.getCity());
     }
+
     public User getUserById(long userId) throws Exception {
         Optional<User> optionalUser = userRepository.findById(userId);
 
@@ -53,5 +52,11 @@ public class UserService {
         }
 
         return optionalUser.get();
+    }
+
+    @Transactional
+    public void updateUserPassword(long userId, String newPassword) {
+        User user = this.userRepository.findById(userId).get();
+        user.setPassword(newPassword);
     }
 }

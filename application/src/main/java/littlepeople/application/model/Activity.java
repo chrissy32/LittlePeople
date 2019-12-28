@@ -1,9 +1,6 @@
 package littlepeople.application.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,9 +29,4 @@ public class Activity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Hospital.class)
     @JoinColumn(name = "hospital", referencedColumnName = "id")
     private Hospital hospital;
-
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = Report.class)
-    @JoinColumn(name = "report", referencedColumnName = "id")
-    private Report report;
-
 }

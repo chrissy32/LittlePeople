@@ -1,5 +1,6 @@
 package littlepeople.application.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,12 +28,4 @@ public class Report extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Activity.class)
     @JoinColumn(name = "activity", referencedColumnName = "id")
     private Activity activity;
-
-    public Report(Activity activity, String text) {
-        this.activity = activity;
-        this.description = this.activity.getDescription();
-        this.category = this.activity.getCategory();
-        this.title = this.activity.getTitle();
-        this.text = text;
-    }
 }
