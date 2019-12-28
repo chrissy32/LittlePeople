@@ -47,6 +47,7 @@ public class FilterConfiguration {
         registrationBean.addUrlPatterns("/api/report/*");
         registrationBean.addUrlPatterns("/api/activity/*");
         registrationBean.addUrlPatterns("/api/hospital/*");
+        registrationBean.addUrlPatterns("/api/proposal/*");
 
         return registrationBean;
     }
@@ -62,6 +63,7 @@ public class FilterConfiguration {
         registrationBean.addUrlPatterns("/api/report/leader/*");
         registrationBean.addUrlPatterns("/api/activity/leader/*");
         registrationBean.addUrlPatterns("/api/hospital/leader/*");
+        registrationBean.addUrlPatterns("/api/proposal/leader/*");
 
         return registrationBean;
     }

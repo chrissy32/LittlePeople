@@ -8,8 +8,8 @@ INSERT INTO User(username, password, email, phone, firstName, surname, city, isA
 INSERT INTO User(username, password, email, phone, firstName, surname, city, isAdmin, hospital)  VALUES
           ('moisit', '1234', 'moisit@gmail.com', '0720321458', 'Teofana', 'Moisi','cluj',false, 1);
 
-INSERT INTO Proposal(proposedBy, description, category, title, status, hospital) VALUES
-          ('moisit', 'description1', 'games', 'title1', 'PENDING', 2);
+INSERT INTO Proposal(proposedBy, description, category, title, status, dateAndTime, hospital) VALUES
+          ('moisit', 'description1', 'games', 'title1', 'PENDING', '2020-01-01 12:17:55', 2);
 
 INSERT INTO Activity(description, category, title, status, dateAndTime, hospital) VALUES
           ('description1', 'games', 'title1', 'IN_PROGRESS', '2019-12-12 12:17:55', 1);
