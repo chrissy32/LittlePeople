@@ -28,6 +28,8 @@ public class UserService {
         final String password = UUID.randomUUID().toString().replace("-","");
         user.setEmail(user.getEmail());
         user.setPassword(password);
+        user.setIsAdmin(false);
+        user.setCity(user.getHospital().getCity());
         userRepository.save(user);
         mailService.sendEmail(user.getEmail(), MailService.MAIL_SUBJECT, MailService.MAIL_MESSAGE + password);
     }
