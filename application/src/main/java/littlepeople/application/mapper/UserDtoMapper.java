@@ -41,7 +41,7 @@ public class UserDtoMapper extends AbstractMapper<User, UserDto> {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
-        userDto.setPassword(user.getPassword());
+        //userDto.setPassword(user.getPassword());
         userDto.setEmail(user.getEmail());
         userDto.setPhone(user.getPhone());
         userDto.setFirstName(user.getFirstName());
