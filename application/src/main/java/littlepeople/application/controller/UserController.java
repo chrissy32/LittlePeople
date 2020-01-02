@@ -4,17 +4,17 @@ package littlepeople.application.controller;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import littlepeople.application.dto.AddUserDto;
-import littlepeople.application.dto.UserUpdatePasswordRequestDto;
-import littlepeople.application.dto.UserUpdateRequestDto;
-import littlepeople.application.dto.UserUpdateResponseDto;
+import littlepeople.application.dto.*;
 import littlepeople.application.mapper.AddUserDtoMapper;
+import littlepeople.application.mapper.UserDtoMapper;
 import littlepeople.application.model.User;
 import littlepeople.application.service.LoginService;
 import littlepeople.application.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +27,8 @@ public class UserController {
     AddUserDtoMapper addUserDtoMapper;
     @Autowired
     LoginService loginService;
+    @Autowired
+    UserDtoMapper userDtoMapper;
 
     protected static final String LEADER_ENDPOINT = "/leader";
 
@@ -123,6 +125,24 @@ public class UserController {
                                    @RequestBody UserUpdatePasswordRequestDto userUpdatePasswordRequestDto) throws Exception {
         long userId = loginService.getUserSession(userToken).getUserId();
         userService.updateUserPassword(userId, userUpdatePasswordRequestDto.getNewPassword());
+    }
+
+    @ApiOperation("Receive VolunteersByCity signal.")
+    @ApiResponses({@ApiResponse(
+            code = 200,
+            message = "Signal received and processed successfully."
+    ), @ApiResponse(
+            code = 400,
+            message = "Bad Request | Signal received but could not be processed correctly."
+    )})
+    @RequestMapping(
+            name = "Get all volunteers from a city api",
+            value = {LEADER_ENDPOINT + "/getVolunteersByCity"},
+            produces = {"application/json"},
+            method = {RequestMethod.GET}
+    )
+    public List<UserDto> getAllVolunteersFromCity(@RequestParam(value = "city") String city) {
+        return userDtoMapper.convertModelsToDtos(userService.getAllVolunteersFromCity(city));
     }
 }
 
