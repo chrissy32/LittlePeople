@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 import java.util.Optional;
 
@@ -26,6 +28,8 @@ public class UserService {
         final String password = UUID.randomUUID().toString().replace("-","");
         user.setEmail(user.getEmail());
         user.setPassword(password);
+        user.setIsAdmin(false);
+        user.setCity(user.getHospital().getCity());
         userRepository.save(user);
         mailService.sendEmail(user.getEmail(), MailService.MAIL_SUBJECT, MailService.MAIL_MESSAGE + password);
     }
@@ -62,5 +66,9 @@ public class UserService {
     public void updateUserPassword(long userId, String newPassword) {
         User user = this.userRepository.findById(userId).get();
         user.setPassword(newPassword);
+    }
+
+    public List<User> getAllVolunteersFromCity(String city) {
+        return userRepository.getAllVolunteersFromCity(city);
     }
 }
