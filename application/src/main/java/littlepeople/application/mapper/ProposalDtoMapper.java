@@ -32,7 +32,8 @@ public class ProposalDtoMapper extends AbstractMapper<Proposal, ProposalDto> {
         proposal.setStatus(proposalDto.getStatus());
         proposal.setTitle(proposalDto.getTitle());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        proposal.setDateAndTime(LocalDateTime.parse(proposalDto.getDateAndTime(), formatter));
+        proposal.setStartDateAndTime(LocalDateTime.parse(proposalDto.getStartDateAndTime(), formatter));
+        proposal.setEndDateAndTime(LocalDateTime.parse(proposalDto.getEndDateAndTime(), formatter));
         return proposal;
     }
 
@@ -46,7 +47,8 @@ public class ProposalDtoMapper extends AbstractMapper<Proposal, ProposalDto> {
         proposalDto.setProposedBy(proposal.getProposedBy().getUsername());
         proposalDto.setStatus(proposal.getStatus());
         proposalDto.setTitle(proposal.getTitle());
-        proposalDto.setDateAndTime(proposal.getDateAndTime().toString());
+        proposalDto.setStartDateAndTime(proposal.getStartDateAndTime().toString());
+        proposalDto.setEndDateAndTime(proposal.getEndDateAndTime().toString());
         return proposalDto;
     }
 }

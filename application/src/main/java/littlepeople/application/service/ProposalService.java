@@ -48,7 +48,8 @@ public class ProposalService {
         activity.setStatus(proposal.getStatus());
         activity.setHospital(proposal.getHospital());
         activity.setTitle(proposal.getTitle());
-        activity.setDateAndTime(proposal.getDateAndTime());
+        activity.setStartDateAndTime(proposal.getStartDateAndTime());
+        activity.setEndDateAndTime(proposal.getEndDateAndTime());
         activity.setCategory(proposal.getCategory());
         activity.setDescription(proposal.getDescription());
         return activityService.addActivity(activity);

@@ -24,7 +24,10 @@ public class Activity extends BaseEntity {
     private String status = StatusEnum.PENDING.toString();
 
     @Column
-    private LocalDateTime dateAndTime;
+    private LocalDateTime startDateAndTime;
+
+    @Column
+    private LocalDateTime endDateAndTime;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Hospital.class)
     @JoinColumn(name = "hospital", referencedColumnName = "id")
