@@ -26,7 +26,7 @@ public class ActivityService {
     }
 
     public List<Activity> getAllActivitiesFromHospital(Long hospitalId){
-        return activityRepository.getAllActivitesFromHospital(hospitalId);
+        return activityRepository.getAllActivitiesFromHospital(hospitalId);
     }
 
     public Activity getActivityById(Long id){
