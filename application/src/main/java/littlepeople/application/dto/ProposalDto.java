@@ -15,6 +15,7 @@ public class ProposalDto extends BaseDto {
     private String category;
     private String title;
     private String status;
-    private String dateAndTime;
+    private String startDateAndTime;
+    private String endDateAndTime;
     private Long hospitalId;
 }
