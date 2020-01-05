@@ -1,6 +1,5 @@
 package littlepeople.application.service;
 
-import littlepeople.application.dto.ActivityDto;
 import littlepeople.application.model.Activity;
 import littlepeople.application.model.Proposal;
 import littlepeople.application.model.StatusEnum;
@@ -9,6 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Xps 9560
@@ -60,5 +65,40 @@ public class ProposalService {
         Proposal proposal = getProposalById(proposalId);
         proposal.setStatus(StatusEnum.REJECTED.toString());
         return proposal;
+    }
+
+    public List<Proposal> getAllProposalsWithOptionalStatus(Optional<String> optionalStatus) {
+        if (!optionalStatus.isPresent()) {
+            return this.proposalRepository.getAllProposals();
+        }
+        else {
+            return this.proposalRepository.getAllProposalsWithStatus(optionalStatus.get());
+        }
+    }
+
+
+    public List<Proposal> getAllProposalsFromCurrentWeekWithOptionalStatus(Optional<String> optionalStatus) {
+        LocalDate today = LocalDate.now();
+        // Go backward to get Monday
+        LocalDate monday = today;
+        while (monday.getDayOfWeek() != DayOfWeek.MONDAY) {
+            monday = monday.minusDays(1);
+        }
+        // Go forward to get Sunday
+        LocalDate sunday = today;
+        while (sunday.getDayOfWeek() != DayOfWeek.SUNDAY) {
+            sunday = sunday.plusDays(1);
+        }
+
+
+        LocalDateTime beginWeek = monday.atStartOfDay();
+        LocalDateTime endWeek = sunday.atStartOfDay().plusHours(24);
+
+        if (!optionalStatus.isPresent()) {
+            return this.proposalRepository.getAllProposalsFromThisWeek(beginWeek, endWeek);
+        }
+        else {
+            return this.proposalRepository.getAllProposalsFromThisWeekWithStatus(beginWeek, endWeek, optionalStatus.get());
+        }
     }
 }
