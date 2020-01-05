@@ -4,6 +4,7 @@ import littlepeople.application.dto.ActivityDto;
 import littlepeople.application.dto.ProposalDto;
 import littlepeople.application.model.Activity;
 import littlepeople.application.model.Proposal;
+import littlepeople.application.model.Vote;
 import littlepeople.application.service.HospitalService;
 import littlepeople.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class ProposalDtoMapper extends AbstractMapper<Proposal, ProposalDto> {
         proposalDto.setTitle(proposal.getTitle());
         proposalDto.setStartDateAndTime(proposal.getStartDateAndTime().toString());
         proposalDto.setEndDateAndTime(proposal.getEndDateAndTime().toString());
+        proposalDto.setUserIdsWhoVotedThisProposal(proposal.getVotes().stream().map(vote -> vote.getUser().getId()).collect(Collectors.toSet()));
         return proposalDto;
     }
 }

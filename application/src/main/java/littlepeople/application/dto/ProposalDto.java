@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,4 +21,5 @@ public class ProposalDto extends BaseDto {
     private String startDateAndTime;
     private String endDateAndTime;
     private Long hospitalId;
+    private Set<Long> userIdsWhoVotedThisProposal;
 }

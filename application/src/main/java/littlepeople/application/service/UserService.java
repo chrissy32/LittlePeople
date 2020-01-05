@@ -48,12 +48,8 @@ public class UserService {
         user.setSurname(userUpdateRequestDto.getSurname());
     }
 
-    public User getUserById(long userId) throws Exception {
+    public User getUserById(long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
-
-        if (!optionalUser.isPresent()) {
-            throw new Exception("Invalid user id!");
-        }
 
         return optionalUser.get();
     }
