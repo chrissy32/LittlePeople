@@ -4,16 +4,22 @@ package littlepeople.application.controller;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import littlepeople.application.dto.AcceptProposalResponseDto;
-import littlepeople.application.dto.ActivityDto;
-import littlepeople.application.dto.ProposalDto;
+import littlepeople.application.dto.*;
 import littlepeople.application.mapper.ActivityDtoMapper;
 import littlepeople.application.mapper.ProposalDtoMapper;
+import littlepeople.application.mapper.ProposalLocationDtoMapper;
+import littlepeople.application.model.Proposal;
 import littlepeople.application.service.LoginService;
 import littlepeople.application.service.ProposalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static littlepeople.application.controller.UserController.LEADER_ENDPOINT;
 
@@ -26,6 +32,9 @@ public class ProposalController {
 
     @Autowired
     ProposalDtoMapper proposalDtoMapper;
+
+    @Autowired
+    ProposalLocationDtoMapper proposalLocationDtoMapper;
 
     @Autowired
     ActivityDtoMapper activityDtoMapper;
@@ -106,6 +115,36 @@ public class ProposalController {
     )
     public ProposalDto getProposalById(@RequestParam(value = "proposalId") Long proposalId) {
         return proposalDtoMapper.convertModelToDto(proposalService.getProposalById(proposalId));
+    }
+    @ApiOperation("Receive All proposals, optionally with specific status signal and possibly only from current week")
+    @ApiResponses({@ApiResponse(
+            code = 200,
+            message = "Signal received and processed successfully."
+    ), @ApiResponse(
+            code = 400,
+            message = "Bad Request | Signal received but could not be processed correctly."
+    )})
+    @RequestMapping(
+            name = "Get All Proposal api",
+            value = {"/getProposalOptionalWithStatus"},
+            produces = {"application/json"},
+            method = {RequestMethod.GET}
+    )
+    public ResponseEntity<List<ProposalLocationDto>> getAllProposalsOptionalWithStatus(
+            @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "currentWeek") Boolean fromCurrentWeek) {
+        Optional<String> optionalStatus = Optional.ofNullable(status);
+        List<Proposal> proposalList;
+
+        if (fromCurrentWeek) {
+            proposalList = proposalService.getAllProposalsFromCurrentWeekWithOptionalStatus(optionalStatus);
+        }
+        else {
+            proposalList = proposalService.getAllProposalsWithOptionalStatus(optionalStatus);
+        }
+
+        List<ProposalLocationDto> responseProposalsList = new ArrayList<>(proposalLocationDtoMapper.convertModelsToDtos(proposalList));
+        return new ResponseEntity<List<ProposalLocationDto>>(responseProposalsList, HttpStatus.OK);
     }
 
     @ApiOperation("Receive Accept Proposal signal.")
