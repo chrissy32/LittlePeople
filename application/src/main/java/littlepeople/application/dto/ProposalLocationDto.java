@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,4 +20,5 @@ public class ProposalLocationDto extends BaseDto {
     private String startDateAndTime;
     private String endDateAndTime;
     private String location;
+    private Set<Long> userIdsWhoVotedThisProposal;
 }

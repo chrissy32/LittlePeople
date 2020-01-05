@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 @Component
 public class ProposalLocationDtoMapper extends AbstractMapper<Proposal, ProposalLocationDto> {
@@ -53,6 +54,7 @@ public class ProposalLocationDtoMapper extends AbstractMapper<Proposal, Proposal
         proposalDto.setTitle(proposal.getTitle());
         proposalDto.setStartDateAndTime(proposal.getStartDateAndTime().toString());
         proposalDto.setEndDateAndTime(proposal.getEndDateAndTime().toString());
+        proposalDto.setUserIdsWhoVotedThisProposal(proposal.getVotes().stream().map(vote -> vote.getUser().getId()).collect(Collectors.toSet()));
         return proposalDto;
     }
 }
