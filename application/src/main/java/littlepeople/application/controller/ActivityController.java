@@ -63,8 +63,8 @@ public class ActivityController {
             produces = {"application/json"},
             method = {RequestMethod.GET}
     )
-    public List<ActivityDto> getAllActivitiesFromHospital(@RequestParam(value = "hospitalId") String hospitalId) {
-        return activityDtoMapper.convertModelsToDtos(activityService.getAllActivitiesFromHospital(Long.parseLong(hospitalId)));
+    public List<ActivityDto> getAllActivitiesFromHospital(@RequestParam(value = "hospitalId") Long hospitalId) {
+        return activityDtoMapper.convertModelsToDtos(activityService.getAllActivitiesFromHospital(hospitalId));
     }
 
     @ApiOperation("Receive ActivityById signal.")
