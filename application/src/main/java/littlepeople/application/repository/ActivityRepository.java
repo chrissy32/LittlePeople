@@ -14,6 +14,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     @Query("SELECT activity FROM Activity activity LEFT JOIN FETCH activity.hospital hospital WHERE hospital.city = :city")
     List<Activity> getAllActivitiesFromCity(@Param("city") String city);
 
-    @Query("SELECT activity FROM Activity activity WHERE activity.hospital = :hospital")
-    List<Activity> getAllActivitesFromHospital(@Param("hospital") Long hospital);
+    @Query("SELECT activity FROM Activity activity WHERE activity.hospital.id = :hospitalId")
+    List<Activity> getAllActivitiesFromHospital(@Param("hospitalId") Long hospitalId);
 }

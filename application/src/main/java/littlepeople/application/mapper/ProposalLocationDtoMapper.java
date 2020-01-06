@@ -1,10 +1,8 @@
 package littlepeople.application.mapper;
 
-import littlepeople.application.dto.ActivityDto;
-import littlepeople.application.dto.ProposalDto;
-import littlepeople.application.model.Activity;
+import littlepeople.application.dto.ProposalLocationDto;
+import littlepeople.application.model.Hospital;
 import littlepeople.application.model.Proposal;
-import littlepeople.application.model.Vote;
 import littlepeople.application.service.HospitalService;
 import littlepeople.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +10,26 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ProposalDtoMapper extends AbstractMapper<Proposal, ProposalDto> {
+public class ProposalLocationDtoMapper extends AbstractMapper<Proposal, ProposalLocationDto> {
     @Autowired
     HospitalService hospitalService;
     @Autowired
     UserService userService;
 
     @Override
-    public Proposal convertDtoToModel(ProposalDto proposalDto) {
+    public Proposal convertDtoToModel(ProposalLocationDto proposalDto) {
+        // TODO never used I hope
+
+
+
         Proposal proposal = new Proposal();
         proposal.setId(proposalDto.getId());
         proposal.setCategory(proposalDto.getCategory());
         proposal.setDescription(proposalDto.getDescription());
-        proposal.setHospital(hospitalService.getById(proposalDto.getHospitalId()));
+        //proposal.setHospital(hospitalService.getById(proposalDto.getHospitalId()));
         proposal.setProposedBy(userService.getUserByUsername(proposalDto.getProposedBy()));
         proposal.setStatus(proposalDto.getStatus());
         proposal.setTitle(proposalDto.getTitle());
@@ -39,12 +40,15 @@ public class ProposalDtoMapper extends AbstractMapper<Proposal, ProposalDto> {
     }
 
     @Override
-    public ProposalDto convertModelToDto(Proposal proposal) {
-        ProposalDto proposalDto = new ProposalDto();
+    public ProposalLocationDto convertModelToDto(Proposal proposal) {
+        ProposalLocationDto proposalDto = new ProposalLocationDto();
         proposalDto.setId(proposal.getId());
         proposalDto.setCategory(proposal.getCategory());
         proposalDto.setDescription(proposal.getDescription());
-        proposalDto.setHospitalId(proposal.getHospital().getId());
+
+        Hospital hospitalObject = hospitalService.getById(proposal.getHospital().getId());
+        proposalDto.setLocation(hospitalObject.getName() + " " + hospitalObject.getCity());
+
         proposalDto.setProposedBy(proposal.getProposedBy().getUsername());
         proposalDto.setStatus(proposal.getStatus());
         proposalDto.setTitle(proposal.getTitle());
