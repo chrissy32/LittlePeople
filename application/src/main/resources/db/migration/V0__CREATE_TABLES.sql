@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS Hospital(id SERIAL PRIMARY KEY,
-      name VARCHAR(50) NOT NULL,
+      name VARCHAR(255) NOT NULL,
       city VARCHAR(50) NOT NULL,
       address VARCHAR(255) NOT NULL);
 
