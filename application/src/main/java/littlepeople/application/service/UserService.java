@@ -31,7 +31,7 @@ public class UserService {
         user.setIsAdmin(false);
         user.setCity(user.getHospital().getCity());
         userRepository.save(user);
-        mailService.sendEmail(user.getEmail(), MailService.MAIL_SUBJECT, MailService.MAIL_MESSAGE + password);
+        mailService.sendEmail(user.getEmail(), password);
     }
 
     @Transactional
