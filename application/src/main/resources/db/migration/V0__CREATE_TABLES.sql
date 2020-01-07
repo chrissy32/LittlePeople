@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS User(id serial PRIMARY KEY,
       city VARCHAR(100),
       isAdmin BOOLEAN,
       hospital BIGINT UNSIGNED,
-      FOREIGN KEY(hospital) REFERENCES Hospital(id));
+      FOREIGN KEY(hospital) REFERENCES Hospital(id) ON DELETE SET NULL);
 
 CREATE TABLE IF NOT EXISTS Proposal(id serial PRIMARY KEY,
       proposedBy VARCHAR(50) NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS Proposal(id serial PRIMARY KEY,
       startDateAndTime TIMESTAMP NOT NULL,
       endDateAndTime TIMESTAMP NOT NULL,
       hospital BIGINT UNSIGNED,
-      FOREIGN KEY(hospital) REFERENCES Hospital(id),
-      FOREIGN KEY(proposedBy) REFERENCES User(username));
+      FOREIGN KEY(hospital) REFERENCES Hospital(id) ON DELETE CASCADE,
+      FOREIGN KEY(proposedBy) REFERENCES User(username) ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS Activity(id serial PRIMARY KEY,
       description VARCHAR(255) NOT NULL,
@@ -56,4 +56,4 @@ CREATE TABLE IF NOT EXISTS Vote(user BIGINT UNSIGNED NOT NULL,
       proposal BIGINT UNSIGNED NOT NULL,
       PRIMARY KEY(user, proposal),
       FOREIGN KEY(user) REFERENCES User(id) ON DELETE CASCADE,
-      FOREIGN KEY(proposal) REFERENCES Proposal(id) ON DELETE CASCADE)
+      FOREIGN KEY(proposal) REFERENCES Proposal(ido) ON DELETE CASCADE)
