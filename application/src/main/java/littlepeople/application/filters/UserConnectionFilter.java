@@ -25,7 +25,7 @@ public class UserConnectionFilter extends GenericFilterBean {
     @Autowired
     private LoginService loginService;
 
-    private final int numberSecondsToExpire = 60 * 60;
+    private final int numberSecondsToExpire = 24 * 60 * 60; //1 day
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -62,6 +62,8 @@ public class UserConnectionFilter extends GenericFilterBean {
             Duration duration = Duration.between(sessionCreationTime, currentTime);
 
             if (duration.getSeconds() > this.numberSecondsToExpire) {
+                loginService.logoutUser(userToken);
+
                 log.trace("UserConnectionFilter: doFilter() Session has expired!");
                 httpResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
                 return;
