@@ -56,9 +56,9 @@ public class ProposalController {
             produces = {"application/json"},
             method = {RequestMethod.POST}
     )
-    public ProposalDto addProposal(@RequestHeader("AUTHORIZATION") String userToken, @RequestBody ProposalDto proposalDto) throws Exception {
+    public ProposalLocationDto addProposal(@RequestHeader("AUTHORIZATION") String userToken, @RequestBody ProposalDto proposalDto) throws Exception {
         proposalDto.setProposedBy(loginService.getUserSession(userToken).getUsername());
-        return proposalDtoMapper.convertModelToDto(proposalService.addProposal(proposalDtoMapper.convertDtoToModel(proposalDto)));
+        return proposalLocationDtoMapper.convertModelToDto(proposalService.addProposal(proposalDtoMapper.convertDtoToModel(proposalDto)));
     }
 
     @ApiOperation("Receive Update Proposal signal.")
