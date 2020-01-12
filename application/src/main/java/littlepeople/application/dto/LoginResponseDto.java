@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 @ToString
 public class LoginResponseDto {
+    private Long userId;
     private String userToken;
     private String email;
     private String username;

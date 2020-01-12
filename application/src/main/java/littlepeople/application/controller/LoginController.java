@@ -39,6 +39,7 @@ public class LoginController {
             }
 
             LoginResponseDto loginResponseDto = LoginResponseDto.builder()
+                    .userId(newUserSession.getUserId())
                     .userToken(newUserSession.getUserToken())
                     .email(userLoggedIn.getEmail())
                     .username(userLoggedIn.getUsername())
